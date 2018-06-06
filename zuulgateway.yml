@@ -1,0 +1,29 @@
+server:
+  port: 8771
+spring:
+  application:
+    name: zuul-gateway
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+  serviceUrl:
+    defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    get:
+      path: /get/**
+      url: http://httpbin.org/get
+    links:
+      path: /links/**
+      url: http://httpbin.org/links
+    images:
+      path: /image/**
+      url: http://httpbin.org/image
+    foos:
+      path: /foos/**
+      url: http://localhost:8081/spring-zuul-foos-resource/foos
